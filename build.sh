@@ -18,7 +18,7 @@ mkdir -p "${BUILDER_DEBIAN_DIR}/tmp/usr/pkgconfig"
 mkdir -p "${BUILDER_DEBIAN_DIR}/tmp/usr/include"
 mkdir -p "${BUILDER_DEBIAN_DIR}/debian"
 mkdir -p "${BUILDER_DEBIAN_DIR}/debian/source"
-mkdir -p "${BUILDER_BASE_DIR}/debian/output"
+mkdir -p "${BUILDER_BASE_DIR}/output"
 
 echo "- Cloning TA-Lib repository"
 if [ ! -d "${BUILDER_TA_LIB_DIR}/.git" ]; then
@@ -177,7 +177,8 @@ cd "${BUILDER_DEBIAN_DIR}"
 dpkg-buildpackage -us -uc -b
 
 echo "- Moving .deb file to output directory"
-mv ../*.deb "${BUILDER_BASE_DIR}/debian/output/"
+mv ../*.deb "${BUILDER_BASE_DIR}/output/"
+mv *.buildinfo "${BUILDER_BASE_DIR}/output/"
 
-echo "- Debian package built and moved to ${BUILDER_BASE_DIR}/debian/output/"
-ls -lha ${BUILDER_BASE_DIR}/debian/output/
+echo "- Debian package built and moved to ${BUILDER_BASE_DIR}/output/"
+ls -lha ${BUILDER_BASE_DIR}/output/
