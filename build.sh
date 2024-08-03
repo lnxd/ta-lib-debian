@@ -4,8 +4,6 @@ export BUILDER_BASE_DIR="${BUILDER_BASE_DIR:-$PWD}"
 export BUILDER_TA_LIB_DIR="${BUILDER_TA_LIB_DIR:-${BUILDER_BASE_DIR}/ta-lib}"
 export BUILDER_DEBIAN_DIR="${BUILDER_DEBIAN_DIR:-${BUILDER_BASE_DIR}/debian}"
 
-set -e
-
 echo "- Updating package lists"
 sudo apt-get update || { echo "- Failed to update package lists"; exit 1; }
 
