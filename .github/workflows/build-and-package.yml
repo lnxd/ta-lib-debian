@@ -34,7 +34,8 @@ jobs:
           echo "RELEASE_TITLE=${FIRST_DEB_NAME%.*}" >> $GITHUB_ENV
 
       - name: Create Release
-        uses: actions/create-release@v1
+        id: create_release
+        uses: actions/create-release@v3
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
@@ -44,11 +45,8 @@ jobs:
           prerelease: true
 
       - name: Upload Release Asset
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        uses: AButler/upload-release-assets@v3.0
         with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: /home/runner/work/ta-lib-debian/ta-lib-debian/output/*.deb
-          asset_name: ${{ env.RELEASE_TITLE }}.deb
-          asset_content_type: application/vnd.debian.binary-package
+          files: /home/runner/work/ta-lib-debian/ta-lib-debian/output/*.deb
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          release-tag: ${{ env.RELEASE_TITLE }}
