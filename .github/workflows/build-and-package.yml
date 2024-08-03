@@ -19,13 +19,9 @@ jobs:
           docker run --rm -v ${{ github.workspace }}:/workspace -w /workspace debian:12-slim bash -c \
           "mkdir -p /workspace/output && sed -i 's/sudo //g' /workspace/build.sh && chmod +x /workspace/build.sh && /workspace/build.sh"
 
-      - name: Find .deb files in filesystem
-        run: find / -type f -iname '*.deb'
-
-
       - name: Collect build artifacts
         uses: actions/upload-artifact@v3
         with:
           name: build-artifacts
           path: |
-            /workspace/output/*
+            /home/runner/work/ta-lib-debian/ta-lib-debian/output/*
