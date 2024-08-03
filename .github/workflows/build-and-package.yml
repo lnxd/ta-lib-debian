@@ -38,8 +38,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ steps.release_title.outputs.RELEASE_TITLE }}
-          release_name: ${{ steps.release_title.outputs.RELEASE_TITLE }}
+          tag_name: ${{ env.RELEASE_TITLE }}
+          release_name: ${{ env.RELEASE_TITLE }}
           draft: false
           prerelease: true
 
@@ -50,5 +50,5 @@ jobs:
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: /home/runner/work/ta-lib-debian/ta-lib-debian/output/*.deb
-          asset_name: ${{ steps.release_title.outputs.RELEASE_TITLE }}.deb
+          asset_name: ${{ env.RELEASE_TITLE }}.deb
           asset_content_type: application/vnd.debian.binary-package
