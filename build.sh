@@ -54,16 +54,13 @@ make install DESTDIR="${BUILDER_DEBIAN_DIR}/tmp"
 
 echo "- Copying library files to the correct location"
 mkdir -p "${BUILDER_DEBIAN_DIR}/usr/lib"
-cp -P "${BUILDER_DEBIAN_DIR}/tmp/usr/lib/libta_lib"* "${BUILDER_DEBIAN_DIR}/usr/lib/"
+cp -R "${BUILDER_DEBIAN_DIR}/tmp/usr/"* "${BUILDER_DEBIAN_DIR}/usr/"
 
 echo "- Creating release files"
 cat << EOF > "${BUILDER_DEBIAN_DIR}/debian/ta-lib.install"
 usr/lib/libta_lib.so.0.0.0
 usr/lib/libta_lib.so.0
 usr/lib/libta_lib.so
-EOF
-
-cat << EOF > "${BUILDER_DEBIAN_DIR}/debian/ta-lib-dev.install"
 usr/include/ta-lib/*.h
 usr/lib/libta_lib.a
 usr/lib/pkgconfig/ta-lib.pc
@@ -82,7 +79,7 @@ Homepage: https://github.com/TA-Lib/ta-lib
 
 Package: ta-lib
 Architecture: any
-Depends: libc6, libm, ${misc:Depends}
+Depends: libc6, ${misc:Depends}
 Description: TA-Lib provides common functions for the technical analysis of stock/future/commodity market data.
 EOF
 
