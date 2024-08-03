@@ -17,7 +17,7 @@ jobs:
       - name: Run build in Debian 12 container
         run: |
           docker run --rm -v ${{ github.workspace }}:/workspace -w /workspace debian:12-slim bash -c \
-          "sed -i 's/sudo //g' /workspace/build.sh && chmod +x /workspace/build.sh && /workspace/build.sh"
+          "sed -i 's/sudo //g' /workspace/build.sh && chmod +x /workspace/build.sh && /workspace/build.sh && ls -lhaR /workspace"
 
       - name: Collect build artifacts
         uses: actions/upload-artifact@v3
