@@ -22,19 +22,9 @@ jobs:
           docker run --rm -v ${{ github.workspace }}:/workspace -w /workspace debian:12-slim bash -c \
           "sed -i 's/sudo //g' /workspace/build.sh && chmod +x /workspace/build.sh && /workspace/build.sh"
 
-      - name: Check if build artifacts exist
-        run: |
-          if ls /workspace/output/*.deb 1> /dev/null 2>&1; then
-            echo "Artifacts found. Proceeding with upload."
-          else
-            echo "No artifacts found. Skipping upload."
-            exit 0
-          fi
-
       - name: Collect build artifacts
         uses: actions/upload-artifact@v3
         with:
           name: build-artifacts
           path: |
             /workspace/output/*.deb
-            /workspace/output/*.buildinfo
